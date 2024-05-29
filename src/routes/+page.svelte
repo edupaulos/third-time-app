@@ -9,8 +9,6 @@
 </svelte:head>
 
 <section>
-
-
 	<Counter />
 </section>
 
@@ -22,5 +20,4 @@
 		align-items: center;
 		flex: 0.6;
 	}
-
 </style>

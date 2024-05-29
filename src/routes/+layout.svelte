@@ -1,7 +1,12 @@
 <script>
-	import "../app.css";
+	import '../app.css';
 	import Header from './Header.svelte';
 	import './styles.css';
+
+	import { dev } from '$app/environment';
+	import { inject } from '@vercel/analytics';
+
+	inject({ mode: dev ? 'development' : 'production' });
 </script>
 
 <div class="flex flex-col min-h-svh bg-50">
@@ -11,14 +16,10 @@
 		<slot />
 	</main>
 
-	<footer>
-		
-	</footer>
+	<footer></footer>
 </div>
 
 <style>
-
-
 	main {
 		flex: 1;
 		display: flex;
@@ -37,5 +38,4 @@
 		align-items: center;
 		padding: 12px;
 	}
-
 </style>
