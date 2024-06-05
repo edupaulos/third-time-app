@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { timer } from '$lib/timer';
-	import { get } from 'svelte/store';
 
 	let breakTime = 0;
 	let isStopped = true;
@@ -104,10 +103,3 @@
 	<!-- Audio alarm -->
 	<audio src="https://assets.mixkit.co/active_storage/sfx/905/905-preview.mp3" bind:this={alarm} />
 </div>
-
-<style>
-	.counter {
-		display: flex;
-		margin: 1rem 0;
-	}
-</style>
