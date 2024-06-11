@@ -93,6 +93,7 @@
 			<button
 				class={`${isBreaking ? 'bg-red-200' : 'bg-green-200'} py-3 px-10 rounded-3xl disabled:bg-100`}
 				on:click={handleBreak}
+				disabled={breakTime <= 0}
 			>
 				<div class="font-bold text-2xl">{isBreaking ? 'Stop Break' : 'Start Break'}</div>
 			</button>
