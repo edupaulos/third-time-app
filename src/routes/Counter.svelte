@@ -7,15 +7,6 @@
 	let alarm: HTMLAudioElement;
 	let breakTimer: number | undefined;
 
-	// Format time function
-	export function formatTime(seconds: number): string {
-		const minutes = Math.floor(seconds / 60)
-			.toString()
-			.padStart(2, '0');
-		const secs = (seconds % 60).toString().padStart(2, '0');
-		return `${minutes}:${secs}`;
-	}
-
 	// Start/Stop button click handler
 	function handleStartStop() {
 		if (isStopped) {
@@ -52,6 +43,7 @@
 
 	// Cleanup on component destruction
 	import { onDestroy } from 'svelte';
+	import { formatTime } from '../utils/formatTime';
 	onDestroy(() => {
 		timer.stop();
 		if (breakTimer !== undefined) {
@@ -68,37 +60,44 @@
 	}
 </script>
 
-<div class="flex flex-col gap-5">
+<div class="flex flex-col items-center">
 	<!-- Timer display -->
 	<div class="flex gap-3">
-		<div class="bg-300 px-36 py-14 rounded-3xl">
-			<span class="text-8xl text-900 font-bold">
-				{#if $timer !== undefined}
-					{formatTime($timer)}
-				{/if}
-			</span>
+		<div class="flex flex-col gap-4">
+			<div class="bg-300 w-[32rem] h-[14rem] rounded-3xl flex justify-center items-center">
+				<span class="text-8xl text-900 font-bold">
+					{#if $timer !== undefined}
+						{formatTime($timer)}
+					{/if}
+				</span>
+			</div>
+
+			<!-- Start/Stop button -->
+			<button
+				class={`${isStopped ? 'bg-green-200' : 'bg-red-200'} py-3 px-10 rounded-3xl`}
+				on:click={handleStartStop}
+			>
+				<div class="font-bold text-2xl">{isStopped ? 'Start' : 'Stop'}</div>
+			</button>
 		</div>
-		<div class="bg-200 px-14 py-14 rounded-3xl">
-			<p>Next Break</p>
-			<span class="text-6xl text-900 font-bold">{formatTime(breakTime)}</span>
+
+		<div class="flex flex-col item gap-4">
+			<div
+				class="bg-200 w-[17rem] h-[14rem] p-16 rounded-3xl flex flex-col justify-center items-center"
+			>
+				<p class="text-xl">Next Break</p>
+				<span class="text-6xl text-900 font-bold">{formatTime(breakTime)}</span>
+			</div>
+
+			<!-- Start/Stop Break button -->
+			<button
+				class={`${isBreaking ? 'bg-red-200' : 'bg-green-200'} py-3 px-10 rounded-3xl disabled:bg-100`}
+				on:click={handleBreak}
+			>
+				<div class="font-bold text-2xl">{isBreaking ? 'Stop Break' : 'Start Break'}</div>
+			</button>
 		</div>
 	</div>
-
-	<!-- Start/Stop button -->
-	<button
-		class={`${isStopped ? 'bg-green-200' : 'bg-red-200'} py-3 px-10 rounded-3xl`}
-		on:click={handleStartStop}
-	>
-		<div class="font-bold text-2xl">{isStopped ? 'Start' : 'Stop'}</div>
-	</button>
-
-	<!-- Start/Stop Break button -->
-	<button
-		class={`${isBreaking ? 'bg-red-200' : 'bg-green-200'} py-3 px-10 rounded-3xl disabled:bg-100`}
-		on:click={handleBreak}
-	>
-		<div class="font-bold text-2xl">{isBreaking ? 'Stop Break' : 'Start Break'}</div>
-	</button>
 
 	<!-- Audio alarm -->
 	<audio src="https://assets.mixkit.co/active_storage/sfx/905/905-preview.mp3" bind:this={alarm} />

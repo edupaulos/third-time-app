@@ -1,15 +1,8 @@
 <script lang="ts">
 	import { timer } from '$lib/timer';
+	import { formatTime } from '../utils/formatTime';
 	import Counter from './Counter.svelte';
 	import '@fontsource/lilita-one';
-
-	function formatTime(seconds: number): string {
-		const minutes = Math.floor(seconds / 60)
-			.toString()
-			.padStart(2, '0');
-		const secs = (seconds % 60).toString().padStart(2, '0');
-		return `${minutes}:${secs}`;
-	}
 
 	// Reactive store subscription
 	let formattedTime: string;
