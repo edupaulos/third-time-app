@@ -44,6 +44,8 @@
 	// Cleanup on component destruction
 	import { onDestroy } from 'svelte';
 	import { formatTime } from '../utils/formatTime';
+	import { isMuted } from '$lib/mute';
+	import { timeDivision } from '$lib/timeDivision';
 	onDestroy(() => {
 		timer.stop();
 		if (breakTimer !== undefined) {
@@ -55,7 +57,7 @@
 	$: {
 		const currentTime = $timer;
 		if (currentTime !== 0 && !isStopped) {
-			breakTime = Math.trunc(currentTime / 3);
+			breakTime = Math.trunc(currentTime / $timeDivision);
 		}
 	}
 </script>
@@ -101,5 +103,9 @@
 	</div>
 
 	<!-- Audio alarm -->
-	<audio src="https://assets.mixkit.co/active_storage/sfx/905/905-preview.mp3" bind:this={alarm} />
+	<audio
+		src="https://assets.mixkit.co/active_storage/sfx/905/905-preview.mp3"
+		bind:this={alarm}
+		muted={$isMuted}
+	/>
 </div>
