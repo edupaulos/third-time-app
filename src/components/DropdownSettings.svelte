@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { isMuted } from '$lib/mute';
-	import { timeDivision } from '$lib/timeDivision';
+	import { settingsStore } from '$lib/settings';
+
 	import { AngleRightOutline, VolumeMuteSolid, VolumeUpSolid } from 'flowbite-svelte-icons';
 	import { Switch } from 'bits-ui';
 
@@ -8,18 +8,17 @@
 	export let settingsItems: Array<{ name: string; icon: any; setting: string }>;
 
 	let activeSetting = '';
-	let isAutoStart = false;
 
 	const showSetting = (setting: string) => {
 		activeSetting = setting;
 	};
 
 	const changeTimeDivision = (divider: number) => {
-		timeDivision.set(divider);
+		settingsStore.updateTimeDivision(divider);
 	};
 
 	const toggleMute = () => {
-		isMuted.update((muted) => !muted);
+		settingsStore.toggleMute();
 	};
 </script>
 
@@ -36,7 +35,7 @@
 					>
 						<span class="flex items-center gap-2">
 							<Icon />
-							<p>{name}</p>
+							<p class="font-bold">{name}</p>
 						</span>
 						<AngleRightOutline class="w-5 h-5" />
 					</button>
@@ -50,7 +49,7 @@
 				class="mb-2 flex items-center gap-2 text-gray-700"
 			>
 				<AngleRightOutline class="transform rotate-180 w-5 h-5" />
-				<p>Back</p>
+				<p class="font-bold">Back</p>
 			</button>
 
 			{#if activeSetting === 'timeDivison'}
@@ -58,15 +57,17 @@
 					{#each [3, 4, 5] as divider}
 						<button
 							on:click={() => changeTimeDivision(divider)}
-							class={`p-2 rounded transition-colors duration-200 ${$timeDivision === divider ? 'bg-300' : 'hover:bg-300'}`}
+							class={`p-2 rounded transition-colors duration-200 ${$settingsStore.timeDivision === divider ? 'bg-300' : 'hover:bg-300'}`}
 						>
-							1/{divider}
+							<span>
+								1/{divider}
+							</span>
 						</button>
 					{/each}
 				</div>
 			{:else if activeSetting === 'alarm'}
 				<button on:click={toggleMute} aria-label="Toggle Mute" class="flex justify-center w-full">
-					{#if $isMuted}
+					{#if $settingsStore.isMute}
 						<VolumeMuteSolid class="w-10 h-10 text-gray-700" />
 					{:else}
 						<VolumeUpSolid class="w-10 h-10 text-gray-700" />
@@ -76,20 +77,16 @@
 				<div class="flex gap-3 items-center">
 					<Switch.Root
 						id="AutoStart"
-						disabled
-						checked={isAutoStart}
-						onCheckedChange={() => {
-							isAutoStart = !isAutoStart;
-						}}
+						checked={$settingsStore.isAutoStart}
+						onCheckedChange={settingsStore.toggleAutoStart}
 						class="peer inline-flex h-[36px] min-h-[36px] w-[60px] shrink-0 cursor-pointer items-center rounded-full px-[3px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-600 focus-visible:ring-offset-2 focus-visible:ring-offset-600 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-400 data-[state=unchecked]:bg-100 data-[state=unchecked]:shadow-mini-inset"
 					>
 						<Switch.Thumb
 							class="pointer-events-none block size-[30px] shrink-0 rounded-full bg-600 transition-transform data-[state=checked]:translate-x-6 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:shadow-mini "
 						/>
 					</Switch.Root>
-					<span>Auto Start is {isAutoStart ? 'enable' : 'disable'}</span>
+					<span>Auto Start is {$settingsStore.isAutoStart ? 'enable' : 'disable'}</span>
 				</div>
-				<span>Under development</span>
 			{/if}
 		</div>
 	{/if}

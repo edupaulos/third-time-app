@@ -9,15 +9,14 @@
 	inject({ mode: dev ? 'development' : 'production' });
 </script>
 
-<div class="flex flex-col min-h-svh bg-50">
+<div class="flex flex-col flex-1 min-h-svh bg-50">
 	<Header />
-
-	<main>
+	<main class="flex flex-1 flex-col m-auto">
 		<slot />
 	</main>
 </div>
 
-<style>
+<!-- <style>
 	main {
 		flex: 1;
 		display: flex;
@@ -28,12 +27,4 @@
 		margin: 0 auto;
 		box-sizing: border-box;
 	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-</style>
+</style> -->

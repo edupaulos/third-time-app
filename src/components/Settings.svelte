@@ -28,9 +28,9 @@
 		aria-expanded={isOpenSettings ? 'true' : 'false'}
 	>
 		<AdjustmentsHorizontalSolid class="w-6 h-6 text-600" />
-		<p class="text-xl text-gray-700">Customize</p>
+		<p class="text-xl text-gray-700 font-bold">Customize</p>
 	</button>
 
 	<!-- Dropdown Menu -->
-	<DropdownSettings {isOpenSettings} {settingsItems}></DropdownSettings>
+	<DropdownSettings {isOpenSettings} {settingsItems} />
 </div>

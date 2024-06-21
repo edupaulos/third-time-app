@@ -34,6 +34,11 @@
 						clearInterval(breakTimer);
 						breakTimer = undefined;
 						isBreaking = false;
+
+						if ($settingsStore.isAutoStart) {
+							timer.start();
+							isStopped = false;
+						}
 					}
 				}, 1000);
 			}
@@ -44,8 +49,7 @@
 	// Cleanup on component destruction
 	import { onDestroy } from 'svelte';
 	import { formatTime } from '../utils/formatTime';
-	import { isMuted } from '$lib/mute';
-	import { timeDivision } from '$lib/timeDivision';
+	import { settingsStore } from '$lib/settings';
 	onDestroy(() => {
 		timer.stop();
 		if (breakTimer !== undefined) {
@@ -57,7 +61,7 @@
 	$: {
 		const currentTime = $timer;
 		if (currentTime !== 0 && !isStopped) {
-			breakTime = Math.trunc(currentTime / $timeDivision);
+			breakTime = Math.trunc(currentTime / $settingsStore.timeDivision);
 		}
 	}
 </script>
@@ -67,19 +71,20 @@
 	<div class="flex gap-3">
 		<div class="flex flex-col gap-4">
 			<div class="bg-300 w-[32rem] h-[14rem] rounded-3xl flex justify-center items-center">
-				<span class="text-8xl text-900 font-bold">
+				<h1 class="text-8xl text-900 font-bold">
 					{#if $timer !== undefined}
 						{formatTime($timer)}
 					{/if}
-				</span>
+				</h1>
 			</div>
 
 			<!-- Start/Stop button -->
 			<button
-				class={`${isStopped ? 'bg-green-200' : 'bg-red-200'} py-3 px-10 rounded-3xl`}
+				class={`${isStopped ? 'bg-green-200' : 'bg-red-200'} py-3 px-10 rounded-3xl disabled:bg-100`}
+				disabled={isBreaking}
 				on:click={handleStartStop}
 			>
-				<div class="font-bold text-2xl">{isStopped ? 'Start' : 'Stop'}</div>
+				<h2 class="font-bold grayscale-0 text-xl tracking-wider">{isStopped ? 'Start' : 'Stop'}</h2>
 			</button>
 		</div>
 
@@ -87,8 +92,8 @@
 			<div
 				class="bg-200 w-[17rem] h-[14rem] p-16 rounded-3xl flex flex-col justify-center items-center"
 			>
-				<p class="text-xl">Next Break</p>
-				<span class="text-6xl text-900 font-bold">{formatTime(breakTime)}</span>
+				<h2 class="text-xl font-black tracking-wider text-600">Next Break</h2>
+				<h1 class="text-6xl text-900 font-bold">{formatTime(breakTime)}</h1>
 			</div>
 
 			<!-- Start/Stop Break button -->
@@ -97,7 +102,7 @@
 				on:click={handleBreak}
 				disabled={breakTime <= 0}
 			>
-				<div class="font-bold text-2xl">{isBreaking ? 'Stop Break' : 'Start Break'}</div>
+				<h2 class="text-xl tracking-wide font-bold">{isBreaking ? 'Stop Break' : 'Start Break'}</h2>
 			</button>
 		</div>
 	</div>
@@ -106,6 +111,6 @@
 	<audio
 		src="https://assets.mixkit.co/active_storage/sfx/905/905-preview.mp3"
 		bind:this={alarm}
-		muted={$isMuted}
+		muted={$settingsStore.isMute}
 	/>
 </div>

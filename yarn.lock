@@ -189,14 +189,24 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.2.tgz#d8bae93ac8b815b2bd7a98078cf91e2724ef11e5"
   integrity sha512-J4yDIIthosAsRZ5CPYP/jQvUAQtlZTTD/4suA08/FEnlxqW3sKS9iAhgsa9VYLZ6vDHn/ixJgIqRQPotoBjxIw==
 
+"@fontsource-variable/rubik@^5.0.22":
+  version "5.0.22"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/rubik/-/rubik-5.0.22.tgz#6d6ac368453086279be98ad19ad90f6ee33f7268"
+  integrity sha512-QwMlj57+k5+IsShA8q6FECU6zlR4CIm4TAy49GIIiMxxpmRwDXbMynrTp2kBNZmlN4b/myXzSRBnI2DXmnWBJA==
+
 "@fontsource/fira-mono@^4.5.10":
   version "4.5.10"
   resolved "https://registry.npmjs.org/@fontsource/fira-mono/-/fira-mono-4.5.10.tgz"
   integrity sha512-bxUnRP8xptGRo8YXeY073DSpfK74XpSb0ZyRNpHV9WvLnJ7TwPOjZll8hTMin7zLC6iOp59pDZ8EQDj1gzgAQQ==
 
+"@fontsource/lato@^5.0.21":
+  version "5.0.21"
+  resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-5.0.21.tgz#134041a543f5e54674a6b40138171ff8031912e1"
+  integrity sha512-UubLwvJO2bKuhWv6+ocx2Bou/pPIT6q7VpYaHIW7ZDaLPQY3uYAhveJg6P7Lvz5HYHyLba8JUc3yP7wvcqA8zQ==
+
 "@fontsource/lilita-one@^5.0.20":
   version "5.0.20"
-  resolved "https://registry.npmjs.org/@fontsource/lilita-one/-/lilita-one-5.0.20.tgz"
+  resolved "https://registry.yarnpkg.com/@fontsource/lilita-one/-/lilita-one-5.0.20.tgz#b4c76219cf2d39bd4493a159fc1d37ecdf4d1140"
   integrity sha512-+BCAjg9MH0Kj+Wngm9yHMNzIW8MQrOay2luIRyxVCT10r0v8Bfrrou4dd0dQAVTL7z3lGMTOA/xhHZZtpHFVbg==
 
 "@humanwhocodes/config-array@^0.11.14":
