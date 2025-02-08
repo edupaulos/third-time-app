@@ -16,6 +16,7 @@
 	];
 
 	const toggleSettings = () => {
+		console.log(isOpenSettings);
 		isOpenSettings = !isOpenSettings;
 	};
 </script>
@@ -32,5 +33,5 @@
 	</button>
 
 	<!-- Dropdown Menu -->
-	<DropdownSettings {isOpenSettings} {settingsItems} />
+	<DropdownSettings bind:isOpenSettings {settingsItems} />
 </div>
