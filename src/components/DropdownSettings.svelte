@@ -57,7 +57,7 @@
 					{#each [3, 4, 5] as divider}
 						<button
 							on:click={() => changeTimeDivision(divider)}
-							class={`p-2 rounded transition-colors duration-200 ${$settingsStore.timeDivision === divider ? 'bg-300' : 'hover:bg-300'}`}
+							class={`p-2 rounded-sm transition-colors duration-200 ${$settingsStore.timeDivision === divider ? 'bg-300' : 'hover:bg-300'}`}
 						>
 							<span>
 								1/{divider}
@@ -79,7 +79,7 @@
 						id="AutoStart"
 						checked={$settingsStore.isAutoStart}
 						onCheckedChange={settingsStore.toggleAutoStart}
-						class="peer inline-flex h-[36px] min-h-[36px] w-[60px] shrink-0 cursor-pointer items-center rounded-full px-[3px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-600 focus-visible:ring-offset-2 focus-visible:ring-offset-600 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-400 data-[state=unchecked]:bg-100 data-[state=unchecked]:shadow-mini-inset"
+						class="peer inline-flex h-[36px] min-h-[36px] w-[60px] shrink-0 cursor-pointer items-center rounded-full px-[3px] transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-600 focus-visible:ring-offset-2 focus-visible:ring-offset-600 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-400 data-[state=unchecked]:bg-100 data-[state=unchecked]:shadow-mini-inset"
 					>
 						<Switch.Thumb
 							class="pointer-events-none block size-[30px] shrink-0 rounded-full bg-600 transition-transform data-[state=checked]:translate-x-6 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:shadow-mini "
