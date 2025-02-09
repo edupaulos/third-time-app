@@ -50,7 +50,6 @@
 	import { onDestroy } from 'svelte';
 	import { formatTime } from '../utils/formatTime';
 	import { settingsStore } from '$lib/settings';
-	import { ChevronDoubleRightOutline } from 'flowbite-svelte-icons';
 	onDestroy(() => {
 		timer.stop();
 		if (breakTimer !== undefined) {
@@ -89,7 +88,7 @@
 			</button>
 		</div>
 
-		<div class="flex flex-col gap-4">
+		<div class="flex flex-col item gap-4">
 			<div
 				class="bg-200 w-[17rem] h-[14rem] p-16 rounded-3xl flex flex-col justify-center items-center"
 			>
@@ -103,18 +102,7 @@
 				on:click={handleBreak}
 				disabled={breakTime <= 0}
 			>
-				<h2 class="relative text-xl tracking-wide font-bold">
-					{isBreaking ? 'Stop Break' : 'Start Break'}
-				</h2>
-			</button>
-		</div>
-
-		<div class="relative w-32 h-16 mt-4">
-			<button
-				class="flex gap-2 items-center justify-center bg-300 w-full h-full rounded-3xl absolute top-0 left-0"
-			>
-				<h2 class="text-xl tracking-wide font-bold">Skip</h2>
-				<ChevronDoubleRightOutline class="size-7" />
+				<h2 class="text-xl tracking-wide font-bold">{isBreaking ? 'Stop Break' : 'Start Break'}</h2>
 			</button>
 		</div>
 	</div>
@@ -122,7 +110,6 @@
 	<!-- Audio alarm -->
 	<audio
 		src="https://assets.mixkit.co/active_storage/sfx/905/905-preview.mp3"
-		volume={100}
 		bind:this={alarm}
 		muted={$settingsStore.isMute}
 	/>

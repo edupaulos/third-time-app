@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { settingsStore } from '$lib/settings';
+
 	import { AngleRightOutline, VolumeMuteSolid, VolumeUpSolid } from 'flowbite-svelte-icons';
 	import { Switch } from 'bits-ui';
-	import { clickOutside } from '$lib/clickOutside';
 
-	export let isOpenSettings: boolean;
-	export let settingsItems;
+	export let isOpenSettings;
+	export let settingsItems: Array<{ name: string; icon: any; setting: string }>;
 
-	let activeSetting: string = '';
+	let activeSetting = '';
 
 	const showSetting = (setting: string) => {
 		activeSetting = setting;
@@ -20,16 +20,10 @@
 	const toggleMute = () => {
 		settingsStore.toggleMute();
 	};
-
-	const closeSettings = () => {
-		isOpenSettings = false;
-		activeSetting = '';
-	};
 </script>
 
 <div
 	class={`${isOpenSettings ? '' : 'hidden'} bg-200 p-3 absolute rounded-2xl mt-2 right-0 z-10 min-w-[16rem]`}
-	use:clickOutside={closeSettings}
 >
 	{#if !activeSetting}
 		<ul class="">
